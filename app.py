@@ -9,7 +9,7 @@ from typing import List, Dict
 from langchain.document_loaders import PyPDFLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.embeddings import OpenAIEmbeddings
-from langchain.vectorstores import FAISS
+from langchain.vectorstores import Chroma
 from langchain.chains import ConversationalRetrievalChain
 from langchain.chat_models import ChatOpenAI
 from langchain.memory import ConversationBufferMemory
@@ -171,7 +171,7 @@ class PDFChatBot:
             
             # Create embeddings
             embeddings = OpenAIEmbeddings(openai_api_key=openai_api_key)
-            self.vectorstore = FAISS.from_documents(chunks, embeddings)
+            self.vectorstore = Chroma.from_documents(chunks, embeddings)
             
             # Create conversation chain
             memory = ConversationBufferMemory(
